@@ -1,5 +1,6 @@
 package interview;
 
+import interview.beanLifeCycle02.Teacher;
 import interview.iocFacade01.Factory;
 import interview.iocFacade01.SupportType;
 import interview.iocFacade01.pay.PayFacade;
@@ -16,10 +17,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class ApplicationTests {
 
 	@Autowired
-//	private Teacher teacher;
+	private Teacher teacher;
 	
 	@Test
-	public void testIocFacade() {
+	public void testIocFacade01() {
 		SupportType supportType = new SupportType();
 		supportType.setBusinessType("pay");
 		supportType.setTemplateCode("ali");
@@ -32,5 +33,11 @@ public class ApplicationTests {
 		SearchFacade weixin = Factory.get(supportType2);
 		weixin.search();
 	}
+
+	@Test
+	public void testBeanLifeCycle02() {
+		teacher.printStudentName();
+	}
+
 
 }
