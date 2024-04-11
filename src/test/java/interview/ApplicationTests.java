@@ -1,5 +1,6 @@
 package interview;
 
+import interview.applicationEvent03.TestEventPublish;
 import interview.beanLifeCycle02.Teacher;
 import interview.iocFacade01.Factory;
 import interview.iocFacade01.SupportType;
@@ -18,6 +19,9 @@ public class ApplicationTests {
 
 	@Autowired
 	private Teacher teacher;
+
+	@Autowired
+	private TestEventPublish testEventPublish;
 	
 	@Test
 	public void testIocFacade01() {
@@ -39,5 +43,9 @@ public class ApplicationTests {
 		teacher.printStudentName();
 	}
 
+	@Test
+	public void testApplicationEvent03() {
+		testEventPublish.publish();
+	}
 
 }
