@@ -6,6 +6,7 @@ import interview.iocFacade01.Factory;
 import interview.iocFacade01.SupportType;
 import interview.iocFacade01.pay.PayFacade;
 import interview.iocFacade01.search.SearchFacade;
+import interview.redisDistributeLock.RedisLockWithSetNx;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class ApplicationTests {
 
 	@Autowired
 	private TestEventPublish testEventPublish;
+
+	@Autowired
+	private RedisLockWithSetNx redisLockWithSetNx;
 	
 	@Test
 	public void testIocFacade01() {
@@ -47,5 +51,16 @@ public class ApplicationTests {
 	public void testApplicationEvent03() {
 		testEventPublish.publish();
 	}
+
+	@Test
+	public void testRedisLockWithSetNx() {
+		String lock = redisLockWithSetNx.getLock();
+		if (lock != null) {
+			System.out.println("获取锁成功");
+		} else {
+			System.out.println("获取锁失败");
+		}
+	}
+
 
 }
