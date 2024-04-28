@@ -6,3 +6,10 @@ spring:
     # password:
     # 连接超时时间
     timeout: 10000
+redisson:
+  database: 0
+  address: 127.0.0.1:6379
+  timeout: 10000
+  connection-pool-size: 4
+  connection-minimum-idle-size: 10
+

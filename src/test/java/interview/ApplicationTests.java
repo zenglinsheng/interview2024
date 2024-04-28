@@ -6,8 +6,9 @@ import interview.iocFacade01.Factory;
 import interview.iocFacade01.SupportType;
 import interview.iocFacade01.pay.PayFacade;
 import interview.iocFacade01.search.SearchFacade;
-import interview.redisDistributeLock.RedisLockWithSetNx;
-import interview.zkDistributeLock.ZkLock;
+import interview.redisDistributeLock04.RedisLockWithSetNx;
+import interview.zkDistributeLock05.RedissonUtil;
+import interview.zkDistributeLock05.ZkLock;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -15,6 +16,7 @@ import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.redisson.api.RLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,9 @@ public class ApplicationTests {
 
 	@Autowired
 	private RedisLockWithSetNx redisLockWithSetNx;
+
+	@Autowired
+	private RedissonUtil redissonUtil;
 	
 	@Test
 	public void testIocFacade01() {
@@ -104,6 +109,14 @@ public class ApplicationTests {
 		}
 		client.close();
 
+	}
+
+	@Test
+	public void testRedisson() throws Exception {
+		redissonUtil.lock("order", 30);
+		System.out.println("111");
+		Thread.sleep(5000);
+		redissonUtil.unlock("order");
 	}
 
 }

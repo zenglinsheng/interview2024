@@ -1,4 +1,4 @@
-package interview.redisDistributeLock;
+package interview.redisDistributeLock04;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
