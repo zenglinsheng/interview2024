@@ -2,29 +2,18 @@ package interview;
 
 import interview.applicationEvent03.TestEventPublish;
 import interview.beanLifeCycle02.Teacher;
+import interview.configurationProperties08.TestProperties;
 import interview.iocFacade01.Factory;
 import interview.iocFacade01.SupportType;
 import interview.iocFacade01.pay.PayFacade;
 import interview.iocFacade01.search.SearchFacade;
-import interview.redisDistributeLock04.RedisLockWithSetNx;
-import interview.zkDistributeLock05.RedissonUtil;
-import interview.zkDistributeLock05.ZkLock;
-import org.apache.curator.RetryPolicy;
-import org.apache.curator.framework.CuratorFramework;
-import org.apache.curator.framework.CuratorFrameworkFactory;
-import org.apache.curator.framework.recipes.locks.InterProcessMutex;
-import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.redisson.api.RLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -38,11 +27,11 @@ public class ApplicationTests {
 	@Autowired
 	private TestEventPublish testEventPublish;
 
-	@Autowired
+	/*@Autowired
 	private RedisLockWithSetNx redisLockWithSetNx;
 
 	@Autowired
-	private RedissonUtil redissonUtil;
+	private RedissonUtil redissonUtil;*/
 	
 	@Test
 	public void testIocFacade01() {
@@ -69,7 +58,7 @@ public class ApplicationTests {
 		testEventPublish.publish();
 	}
 
-	@Test
+	/*@Test
 	public void testRedisLockWithSetNx() {
 		String lock = redisLockWithSetNx.getLock();
 		if (lock != null) {
@@ -88,9 +77,9 @@ public class ApplicationTests {
 		} else {
 			System.out.println("获取锁失败");
 		}
-	}
+	}*/
 
-	@Test
+/*	@Test
 	public void testCuratorLock() throws Exception {
 		RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
 		CuratorFramework client = CuratorFrameworkFactory.newClient("localhost:2181", retryPolicy);
@@ -109,14 +98,24 @@ public class ApplicationTests {
 		}
 		client.close();
 
-	}
+	}*/
+
+//	@Test
+//	public void testRedisson() throws Exception {
+//		redissonUtil.lock("order", 30);
+//		System.out.println("111");
+//		Thread.sleep(5000);
+//		redissonUtil.unlock("order");
+//	}
+
+	@Autowired
+	private TestProperties testProperties;
 
 	@Test
-	public void testRedisson() throws Exception {
-		redissonUtil.lock("order", 30);
-		System.out.println("111");
-		Thread.sleep(5000);
-		redissonUtil.unlock("order");
+	public void testConfigurationProperties() {
+		String name = testProperties.getName();
+		String age = testProperties.getAge();
+		System.out.println(name + age);
 	}
 
 }

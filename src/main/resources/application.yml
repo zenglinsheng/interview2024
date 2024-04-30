@@ -13,3 +13,7 @@ redisson:
   connection-pool-size: 4
   connection-minimum-idle-size: 10
 
+test:
+  name: zls
+  age: 28
+
